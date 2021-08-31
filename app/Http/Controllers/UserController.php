@@ -104,6 +104,10 @@ class UserController extends Controller
             $data['owner_id'] = Auth::user()->rol_id == 2 ? Auth::id() : Auth::user()->owner_id;
         }
 
+        if(!isset($data['rol_id'])){
+            $data['rol_id'] = 2;
+        }
+
         $data['created_by_id'] = Auth::id();
         User::create($data);           
 
