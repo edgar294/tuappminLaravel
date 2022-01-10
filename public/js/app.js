@@ -5412,6 +5412,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     _crear: function _crear() {
       this.form = {};
+
+      if (this.auth.rol_id == 1) {
+        this.form.rol_id = 2;
+      }
+
       this.errors = {};
     },
     _closeModal: function _closeModal() {
@@ -5476,8 +5481,8 @@ __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 
 
 var axios = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
-  //baseURL: `http://127.0.0.1:8000/`,
-  baseURL: "http://tuappmin.com/"
+  baseURL: "http://127.0.0.1:8000/" //baseURL: `http://tuappmin.com/`,
+
 });
 moment__WEBPACK_IMPORTED_MODULE_2___default().locale('es');
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");

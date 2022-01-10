@@ -187,6 +187,10 @@
             },
             _crear() {
                 this.form = {};
+                if(this.auth.rol_id == 1){
+                    this.form.rol_id = 2;
+                }
+
                 this.errors = {};
             },
             _closeModal() {

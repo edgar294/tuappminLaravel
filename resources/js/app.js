@@ -7,8 +7,8 @@ import axiosApi from 'axios';
 import moment from "moment";
 
 const axios = axiosApi.create({
-    //baseURL: `http://127.0.0.1:8000/`,
-    baseURL: `http://tuappmin.com/`,
+    baseURL: `http://127.0.0.1:8000/`,
+    //baseURL: `http://tuappmin.com/`,
 });
 
 moment.locale('es');

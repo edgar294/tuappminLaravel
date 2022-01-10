@@ -40,6 +40,7 @@ class ChatController extends Controller
         ->select([
             'm.*', 'u.name as emisor', 'us.name as receptor'
         ])
+        ->orderBy('m.id', 'ASC')
         ->get();
 
         return response()->json(compact('messages'), 201);  
@@ -94,7 +95,7 @@ class ChatController extends Controller
 
             $message->image = $filename;
         }
-        
+
         $message->message = $request->message;
         $message->emisor_id = $auth->id;
         $message->receptor_id = $auth->id == $chat->emisor_id ? $chat->receptor_id : $chat->emisor_id;
