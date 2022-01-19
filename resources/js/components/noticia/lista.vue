@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="d-md-flex align-items-center mb-3">
             <div class="breadcrumb-title pr-3">Noticias</div>
             
             <div class="ml-auto">

@@ -66,5 +66,9 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'user' => \App\Http\Middleware\User::class,
         'notificacion' => \App\Http\Middleware\Notificacion::class,
+        'permisosRoles' => \App\Http\Middleware\PermisosRoles::class,
+        'apartamento' => \App\Http\Middleware\Apartamento::class,
+        'casa' => \App\Http\Middleware\Casa::class,
+        'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
     ];
 }

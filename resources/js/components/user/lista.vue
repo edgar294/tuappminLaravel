@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="d-md-flex align-items-center mb-3">
             <div class="breadcrumb-title pr-3">{{ auth.rol_id == 1 ? 'Conjuntos residenciales' : 'Usuarios' }}</div>
             
             <div class="ml-auto">
@@ -52,6 +52,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col" v-if="auth.rol_id == 1">NIT</th>
                                 <th scope="col" v-if="auth.rol_id != 1">Rol</th>
+                                <th scope="col" v-if="auth.rol_id == 1">Tipo</th>
                                 <th scope="col">F. creación</th>
                                 <th scope="col">Acciones</th>
                             </tr>
@@ -62,6 +63,7 @@
                                 <td>{{ item.email }}</td>
                                 <td v-if="auth.rol_id == 1">{{ item.nit }}</td>
                                 <td v-if="auth.rol_id != 1">{{ item.rol }}</td>
+                                <td v-if="auth.rol_id == 1">{{ item.tipo }}</td>
                                 <td>
                                     <dateformat-component :date="item.created_at"></dateformat-component>
                                 </td>

@@ -22,7 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('direccion')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->text('avatar')->nullable();
             $table->string('status')->default('Activo');
+            $table->string('tipo')->nullable();
             $table->unsignedBigInteger('owner_id')->nullable();
             $table->unsignedBigInteger('created_by_id')->nullable();
             $table->unsignedBigInteger('rol_id');

@@ -9,13 +9,31 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ form.id ? 'Modificar' : 'Crear' }} {{ auth.rol_id == 1 ? 'conjunto' : 'usuario' }}</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">	<span aria-hidden="true">&times;</span>
+                        <button type="button" class="close" @click="_closeModal()">	<span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
                     <form @submit.prevent="_onSubmit" method="POST">
                         <div class="modal-body">
                             <div class="row">
+                                <div class="col-md-12 mb-2" v-if="auth.rol_id == 1">
+                                    <p class="mb-1">Tipo de vivienda</p>
+
+                                    <div class="d-flex">
+                                        <div class="form-check mr-3">
+                                            <input class="form-check-input" type="radio" name="check_tipo" 
+                                            id="check_apartamento" value="Apartamento" v-model="form.tipo" required>
+                                            <label class="form-check-label" for="check_apartamento">Apartamento</label>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="check_tipo" 
+                                            id="check_casa" value="Casa" v-model="form.tipo" required>
+                                            <label class="form-check-label" for="check_casa">Casa</label>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Nombre {{ auth.rol_id == 1 ? 'del conjunto' : '' }}</label>
@@ -59,7 +77,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-label">Teléfono</label>
-                                        <input type="text" class="form-control" v-model="form.telefono" required>
+                                        <input type="tel" class="form-control" v-model="form.telefono" required>
                                     </div>
                                 </div>
 
@@ -116,6 +134,7 @@
                     nit: '',
                     telefono: '',
                     direccion: '',
+                    tipo: '',
                     rol_id: '',
                     password: '',
                     password_confirmation: ''
@@ -183,6 +202,7 @@
                 this.form.telefono = this.attrib.telefono;
                 this.form.direccion = this.attrib.direccion;
                 this.form.rol_id = this.attrib.rol_id;
+                this.form.tipo = this.attrib.tipo;
                 $("#modal-crear-editar").modal('toggle');
             },
             _crear() {

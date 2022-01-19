@@ -38,7 +38,7 @@
                         </div>
                         <div class="chat-list">
                             <div class="list-group list-group-flush">
-                                <a class="list-group-item" v-for="(item, key) in messages" style="cursor: pointer;" :key="key" @click="_changeConversacion(item)">
+                                <a class="list-group-item" v-for="(item, key) in messages" style="cursor: pointer;" :key="key" @click="_changeConversacion(item, key)">
                                     <div class="media">
                                         <div class="chat-user">
                                             <img :src="asset + 'images/avatar.png'" width="42" height="42"
@@ -46,14 +46,17 @@
                                         </div>
                                         <div class="media-body ml-2">
                                             <h6 class="mb-0 chat-title">{{ auth.id == item.emisor_id ? item.receptor : item.emisor }}</h6>
-                                            <div class="d-flex justify-content-between">
-                                                <p class="mb-0 chat-msg" style="height: 45px; overflow: hidden; text-overflow: ellipsis;">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bx bx-image mr-2" v-if="item.last_message.image" style="font-size: 1.3em;"></i>
+                                                <div class="d-flex justify-content-between w-100">
+                                                    <p class="mb-0 chat-msg" style="height: 23px; overflow: hidden; text-overflow: ellipsis;">
                                                     {{ item.last_message.message }}                                                
-                                                </p>
-                                                <div v-if="item.count_no_vistos > 0" class="d-flex justify-content-center align-items-center" 
-                                                style="border-radius: 100px; background-color: darkgreen; color: #fff; width: 22px;
-                                                height: 22px; font-size: 12px;">
-                                                    {{ item.count_no_vistos }}  
+                                                    </p>
+                                                    <div v-if="item.count_no_vistos > 0" class="d-flex justify-content-center align-items-center" 
+                                                    style="border-radius: 100px; background-color: darkgreen; color: #fff; width: 22px;
+                                                    height: 22px; font-size: 12px;">
+                                                        {{ item.count_no_vistos }}  
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +150,8 @@
                     this._getConversaciones();
                 }
             },
-            _changeConversacion(data){
+            _changeConversacion(data, key){
+                this.messages[key].count_no_vistos = 0;
                 this.attrib = data;
             },
             _sendMessage() {
@@ -161,8 +165,7 @@
                     })
                     .then(response => {
                         this.message = '';
-                        this.time = new Date().getTime();
-                        this._getConversaciones();                        
+                        this.time = new Date().getTime();                    
                     })
                     .catch(error => {
                         console.log(error)
@@ -173,15 +176,15 @@
             },                 
         },
         mounted() {
+            window.Echo.channel('chat').listen('.ConversacionEvent', (e) => {
+                this.time = new Date().getTime();
+                this._getConversaciones();       
+            })
+
             new PerfectScrollbar('.chat-list');
             new PerfectScrollbar('.chat-content');
             
             this._getConversaciones();
-
-            window.Echo.private('chat').listen('ChatEvent', (e) => {
-                this.time = new Date().getTime();
-                this._getConversaciones();       
-            })
         },
     };
 </script>

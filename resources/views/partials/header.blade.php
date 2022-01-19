@@ -297,8 +297,12 @@
                             <img src="{{ asset('images/avatar.png') }}" class="user-img" alt="user avatar">
                         </div>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right">	<a class="dropdown-item" href="javascript:;"><i
-                                class="bx bx-user"></i><span>Profile</span></a>
+                    <div class="dropdown-menu dropdown-menu-right">	
+                        <!--
+                        <a class="dropdown-item" href="javascript:;"><i
+                                class="bx bx-user"></i><span>Profile</span>
+                        </a>
+                        -->
                         <div class="dropdown-divider mb-0"></div>	<a onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();" class="dropdown-item" href="javascript:;"><i
                                 class="bx bx-power-off"></i><span>Salir</span></a>

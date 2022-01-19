@@ -4,20 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Traits\NotificacionTrait;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
-/** Laravel FCM */
-use LaravelFCM\Message\OptionsBuilder;
-use LaravelFCM\Message\PayloadDataBuilder;
-use LaravelFCM\Message\PayloadNotificationBuilder;
-use FCM;
+/** Models */
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('user')->except('get_all');
     }
 
@@ -134,6 +130,10 @@ class UserController extends Controller
         $user->telefono = $request->telefono;
         $user->direccion = $request->direccion;
         $user->rol_id = $request->rol_id;
+        
+        if(isset($request->tipo)){
+            $user->tipo = $request->tipo;
+        }
         
         if($request->password){
             $user->password = bcrypt($request->password);

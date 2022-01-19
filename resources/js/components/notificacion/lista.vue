@@ -1,7 +1,7 @@
 <template>
     <div>
         <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-md-flex align-items-center mb-3">
+        <div class="d-md-flex align-items-center mb-3">
             <div class="breadcrumb-title pr-3">Notificaciones</div>
             
             <div class="ml-auto">
@@ -18,7 +18,7 @@
                             <!-- Form Group -->
                             <div class="form-group">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Titulo" v-model="busqueda.name">
+                                    <input type="text" class="form-control" placeholder="Texto" v-model="busqueda.name">
                                     <div class="input-group-append" @click="_filtrar(1)">
                                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Filtrar">
                                             <i class="bx bx-search"></i>
@@ -90,7 +90,7 @@
         methods: {
             _getData(page = 1) {
                 axios
-                    .get("notificaciones/get-all-paginate?page=" + page, {
+                    .get("notificaciones_users/get-all-paginate?page=" + page, {
                         params: this.busqueda,
                     })
                     .then((response) => {

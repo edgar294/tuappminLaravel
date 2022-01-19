@@ -9,7 +9,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ form.id ? 'Modificar' : 'Crear' }} noticia</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">	<span aria-hidden="true">&times;</span>
+                        <button type="button" class="close" @click="_closeModal()">	<span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 

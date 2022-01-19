@@ -12,6 +12,11 @@ use App\Models\User;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('pages.chat.index');
@@ -66,7 +71,7 @@ class ChatController extends Controller
         foreach ($messages as $key => $value) {
             $value->last_message = Message::where('codigo', $value->codigo)
             ->orderBy('id', 'DESC')
-            ->select('message', 'created_at')
+            ->select('message', 'created_at', 'image')
             ->first();
 
             $value->count_no_vistos = Message::where('codigo', $value->codigo)
@@ -114,7 +119,8 @@ class ChatController extends Controller
             $message->save();
         }
 
-        broadcast(new ChatEvent())->toOthers();
+        /** Emitimos el evento para actualizar la conversacion */
+        broadcast(new ChatEvent());
 
         return response()->json('Mensaje enviado', 201);
     }

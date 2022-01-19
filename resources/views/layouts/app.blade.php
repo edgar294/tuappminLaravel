@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 	<!-- Required meta tags -->
@@ -57,6 +57,12 @@
 		<!--End Back To Top Button-->
 		@include('partials.footer')
 	</div>
+
+	<script>
+		window.laravelEchoPort = '{{ env("LARAVEL_ECHO_PORT") }}';
+	</script>
+	
+	<script src="//{{ request()->getHost() }}:{{ env("LARAVEL_ECHO_PORT") }}/socket.io/socket.io.js"></script>
 	
 	<!-- JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -78,7 +84,24 @@
 	<script src="{{asset('assets/plugins/notifications/js/notifications.min.js')}}"></script>
 	<script src="{{asset('assets/plugins/sweetalert2/sweetalert2.all.min.js')}}"></script>
     <script src="{{asset('assets/plugins/sweetalert2/sweetalerts.js')}}"></script>
-	<script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>	
+	<script src="{{asset('assets/plugins/dropify/js/dropify.min.js')}}"></script>
+	
+	<script>
+		$(document).ready(function(){
+			@if(session('success'))
+				Lobibox.notify('success', {
+					pauseDelayOnHover: true,
+					continueDelayOnInactiveTab: false,
+					position: 'top right',
+					icon: 'bx bx-check-circle',
+					title: 'Bien hecho',
+					msg: "{{ session('success') }}",
+					sound: false,
+					delay: 5000
+				});
+			@endif
+		})
+	</script>
 
     @yield('asset_end')
 

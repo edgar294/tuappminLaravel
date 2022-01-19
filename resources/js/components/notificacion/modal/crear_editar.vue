@@ -9,7 +9,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ form.id ? 'Modificar' : 'Crear' }} notificación</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">	<span aria-hidden="true">&times;</span>
+                        <button type="button" class="close" @click="_closeModal()">	<span aria-hidden="true">&times;</span>
                         </button>
                     </div>
 
@@ -62,7 +62,7 @@
             },
             _store() {
                 axios
-                    .post('notificacion', this.form)
+                    .post('notificacion_user', this.form)
                     .then(response => {
                         this.btnDisabled = false;
                         if (response.status == 201) {
@@ -80,7 +80,7 @@
             },
             __update() {
                 axios
-                    .put('notificacion/' + this.form.id, this.form)
+                    .put('notificacion_user/' + this.form.id, this.form)
                     .then(response => {                        
                         this.btnDisabled = false;
                         if (response.status == 201) {
